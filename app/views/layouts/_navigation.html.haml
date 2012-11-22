@@ -1,1 +1,10 @@
-= link_to "Teacher Helper", root_path, :class => 'brand'
+%ul
+  %li.name
+    %h1
+      = link_to 'Teacher helper', root_path
+%section
+  %ul.right
+    %li= link_to 'Teacher login', new_teacher_session_path
+    %li= link_to 'Student login', new_student_session_path
+    %li= link_to 'Teacher sign up', new_teacher_registration_path
+    %li= link_to 'Student sign up', new_student_registration_path
