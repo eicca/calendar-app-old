@@ -51,3 +51,4 @@ gem "compass-rails", ">= 1.0.3", :group => :assets
 gem "zurb-foundation", ">= 3.2.0", :group => :assets
 gem "sendgrid", ">= 1.0.1"
 gem "simple_form", ">= 2.0.4"
+gem "quiet_assets", ">= 1.0.1", :group => :development
