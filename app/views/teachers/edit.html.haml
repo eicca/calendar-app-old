@@ -1,0 +1,9 @@
+%h2 Change your schedule
+#schedule
+
+%h2 Editing teacher profile
+
+= simple_form_for @teacher do |f|
+  = f.input :name
+  = f.button :submit
+= link_to "Change email/password", edit_teacher_registration_path

@@ -25,3 +25,5 @@ gem "quiet_assets", ">= 1.0.1", :group => :development
 gem 'devise'
 gem 'ice_cube'
 gem 'jquery-ui-rails'
+gem 'fullcalendar-rails'
+gem 'cancan'

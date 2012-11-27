@@ -1,9 +1,11 @@
 TeacherHelper::Application.routes.draw do
   resources :lessons
 
-  devise_for :teachers
+  resources :teachers
 
-  devise_for :students
+  devise_for :teachers, path_prefix: 'd'
+
+  devise_for :students, path_prefix: 'd'
 
   root :to => "home#index"
 end
