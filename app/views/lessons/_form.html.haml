@@ -1,0 +1,10 @@
+= simple_form_for(@lesson) do |f|
+  = f.error_notification
+
+  #scheduler
+  = f.input :duration, as: :string
+  = f.input :start_at, as: :string
+  = f.hidden_field :teacher_id, value: Teacher.first.id
+
+  .form-actions
+    = f.button :submit

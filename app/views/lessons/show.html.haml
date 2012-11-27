@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b Duration:
+  = @lesson.duration
+%p
+  %b Start at:
+  = @lesson.start_at
+%p
+  %b Completed:
+  = @lesson.completed
+%p
+  %b Student:
+  = @lesson.student
+%p
+  %b Teacher:
+  = @lesson.teacher
+
+= link_to 'Edit', edit_lesson_path(@lesson)
+\|
+= link_to 'Back', lessons_path
