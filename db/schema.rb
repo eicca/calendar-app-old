@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121127195630) do
+ActiveRecord::Schema.define(:version => 20121128143937) do
 
   create_table "lessons", :force => true do |t|
     t.time     "duration",                      :null => false
@@ -25,6 +25,18 @@ ActiveRecord::Schema.define(:version => 20121127195630) do
 
   add_index "lessons", ["student_id"], :name => "index_lessons_on_student_id"
   add_index "lessons", ["teacher_id"], :name => "index_lessons_on_teacher_id"
+
+  create_table "schedules", :force => true do |t|
+    t.integer  "teacher_id"
+    t.string   "title"
+    t.datetime "start_at"
+    t.datetime "end_at"
+    t.boolean  "recurring"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "schedules", ["teacher_id"], :name => "index_schedules_on_teacher_id"
 
   create_table "students", :force => true do |t|
     t.string   "name",                   :default => "", :null => false
@@ -59,7 +71,6 @@ ActiveRecord::Schema.define(:version => 20121127195630) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
-    t.text     "schedule"
   end
 
   add_index "teachers", ["email"], :name => "index_teachers_on_email", :unique => true

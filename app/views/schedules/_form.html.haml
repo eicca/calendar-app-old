@@ -1,0 +1,12 @@
+= simple_form_for(@schedule) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.association :teacher
+    = f.input :title
+    = f.input :start_at
+    = f.input :end_at
+    = f.input :recurring
+
+  .form-actions
+    = f.button :submit
