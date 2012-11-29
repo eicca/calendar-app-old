@@ -1,4 +1,6 @@
 %table
-  - @teachers.each do |teacher|
+  - collection.each do |teacher|
     %tr
       %td= link_to teacher.name, teacher
+      - if student_signed_in?
+        %td= link_to 'Take a lesson', new_lesson_path
