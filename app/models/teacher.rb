@@ -1,5 +1,6 @@
 class Teacher < ActiveRecord::Base
   has_many :schedules
+  has_many :lessons
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,

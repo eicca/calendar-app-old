@@ -23,8 +23,8 @@ gem "sendgrid", ">= 1.0.1"
 gem "simple_form", git: "git://github.com/plataformatec/simple_form.git"
 gem "quiet_assets", ">= 1.0.1", :group => :development
 gem 'devise'
-gem 'ice_cube'
 gem 'jquery-ui-rails'
 gem 'fullcalendar-rails'
 gem 'cancan'
 gem 'inherited_resources'
+gem 'squeel'

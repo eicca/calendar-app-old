@@ -1,9 +1,10 @@
 TeacherHelper::Application.routes.draw do
-  resources :schedules
 
   resources :lessons
 
-  resources :teachers
+  resources :teachers do
+    resources :schedules
+  end
 
   devise_for :teachers, path_prefix: 'd'
 

@@ -1,8 +1,5 @@
 class SchedulesController < InheritedResources::Base
   respond_to :json
+  belongs_to :teacher
 
-  protected
-  def begin_of_association_chain
-    current_teacher
-  end
 end
