@@ -3,11 +3,11 @@ class Lesson < ActiveRecord::Base
   belongs_to :teacher
   validates :title, :start_at, :end_at, :teacher, :student, presence: true
   validate :validate_datetime_interval
-  attr_accessible :end_at, :teacher_id, :recurring, :start_at, :title
+  attr_accessible :end_at, :teacher_id, :start_at, :title
 
   def as_json(options = {})
     {
-      id: id,
+      id: id.to_s + ?l,
       title: title,
       start: start_at.rfc822,
       end: end_at.rfc822,

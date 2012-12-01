@@ -2,7 +2,7 @@
 
 %table
   %tr
-    %th Duration
+    %th End at
     %th Start at
     %th Completed
     %th Student
@@ -13,7 +13,7 @@
 
   - @lessons.each do |lesson|
     %tr
-      %td= lesson.duration
+      %td= lesson.end_at
       %td= lesson.start_at
       %td= lesson.completed
       %td= lesson.student

@@ -1,6 +1,8 @@
-%table
+%table.twelve
   - collection.each do |teacher|
     %tr
       %td= link_to teacher.name, teacher
       - if student_signed_in?
         %td= link_to 'Take a lesson', new_lesson_path
+      - elsif
+        %td Sign in as student to take a lesson

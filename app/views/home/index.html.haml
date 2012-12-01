@@ -1,3 +1,15 @@
-= link_to "All teachers", teachers_path
-= link_to "All my lessons", lessons_path
-= link_to "Take new lesson", new_lesson_path
+.row
+  .six.columns
+    %h4 Top teachers
+    = render template: '/teachers/index', locals:{ collection: @teachers}
+    = link_to "All teachers", teachers_path
+  .six.columns
+    %h4 Top students
+    %table.twelve
+      - @students.each do |student|
+        %tr
+          %th Name
+          %th Lessons count
+        %tr
+          %td= student.name
+          %td= student.lessons.count
