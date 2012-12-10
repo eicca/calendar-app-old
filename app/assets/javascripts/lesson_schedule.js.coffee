@@ -35,6 +35,7 @@ $ ->
       $el  = $(element)
       if $el.hasClass('teachers-event')
         $el.css('width', '20px')
+      event.$el = $el
 
     select: (startDate, endDate, allDay, jsEvent, view) ->
       createEvent(startDate, endDate)
@@ -46,14 +47,25 @@ $ ->
     eventDrop: (event,dayDelta,minuteDelta,allDay,revertFunc) ->
       sendUpdate event, revertFunc
 
-    eventClick: (event) ->
-      return if event.className != 'lessons-event'
-      $.ajax
-        type: 'DELETE'
-        url: lessonsUrl + "/#{event.id}"
-        dataType: 'json'
-        success: ->
-          calendar.fullCalendar('removeEvents', event.id)
+    eventClick: (event, jsEvent) ->
+      $modal = $("<div id='eventModal' class='reveal-modal' >" +
+        "<h2>Edit event</h2>" +
+        "<p>lala</p>" +
+        "<a class='close-reveal-modal'>&#215;</a></div>")
+      $('body').append($modal)
+      $modal.reveal
+        animation: 'none'
+        closeOnBackgroundClick: true
+        closed: ->
+          $(this).unbind()
+          $(this).remove()
+      #return if event.className != 'lessons-event'
+      #$.ajax
+        #type: 'DELETE'
+        #url: lessonsUrl + "/#{event.id}"
+        #dataType: 'json'
+        #success: ->
+          #calendar.fullCalendar('removeEvents', event.id)
 
     sendUpdate = (event, revertFunc) ->
       $.ajax
@@ -78,3 +90,4 @@ $ ->
           calendar.fullCalendar 'renderEvent', data
         error: (data, status, error) ->
           alert data.responseText
+

@@ -1,5 +1,11 @@
 %h2 Change your schedule
-#teacher-schedule{ 'data-teacher-id' => 1 }
+#teacher-schedule
+
+:javascript
+  $(function(){
+    var view = new App.Views.SchedulesIndex({teacherId: #{@teacher.id}});
+    $('#teacher-schedule').append(view.render().el);
+  });
 
 %h2 Editing teacher profile
 

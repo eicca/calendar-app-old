@@ -7,12 +7,12 @@ class Schedule < ActiveRecord::Base
   def as_json(options = {})
     {
       id: id,
-      title: title,
+      title: '',
       start: start_at.rfc822,
       end: end_at.rfc822,
       recurring: false,
       allDay: false,
-      className: 'teachers-event'
+      #className: 'teachers-event'
     }
   end
 

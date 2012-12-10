@@ -1,4 +1,4 @@
-$ ->
+deprecated = ->
   calendar = $('#teacher-schedule')
 
   teacherId = calendar.data('teacher-id')
@@ -10,9 +10,11 @@ $ ->
     eventSources: [
       {
         url: scheduleUrl
+        className: 'teachers-event'
       },
       {
         url: lessonsUrl
+        className: 'lessons-event'
       }
     ]
     editable: true
@@ -26,6 +28,13 @@ $ ->
       left: 'title'
       center: 'agendaWeek, month'
       right: 'today prev,next'
+
+    eventAfterRender: (event, el, view) ->
+      $el  = $(el)
+      if $el.hasClass('teachers-event')
+        $el.css('width', '28px')
+      event.$el = $el
+
 
     #dayClick: (date, allDay, jsEvent, view) ->
       #return if view.name != 'agendaWeek'
@@ -45,12 +54,17 @@ $ ->
       sendUpdate event
 
     eventClick: (event) ->
-      $.ajax
-        type: 'DELETE'
-        url: scheduleUrl + "/#{event.id}"
-        dataType: 'json'
-        success: ->
-          calendar.fullCalendar('removeEvents', event.id)
+      modal = new Modal
+        onDelete: ->
+          deleteEvent(event)
+
+      modal.reveal()
+      #$.ajax
+        #type: 'DELETE'
+        #url: scheduleUrl + "/#{event.id}"
+        #dataType: 'json'
+        #success: ->
+          #calendar.fullCalendar('removeEvents', event.id)
 
     sendUpdate = (event) ->
       $.ajax
