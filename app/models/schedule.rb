@@ -3,6 +3,7 @@ class Schedule < ActiveRecord::Base
   attr_accessible :end_at, :recurring, :start_at, :title
 
   validates :title, :start_at, :end_at, :teacher, presence: true
+  validate :validate_datetime_interval
 
   def as_json(options = {})
     {
@@ -14,6 +15,18 @@ class Schedule < ActiveRecord::Base
       allDay: false,
       #className: 'teachers-event'
     }
+  end
+
+  private
+
+  def validate_datetime_interval
+    available = teacher.schedules.where{ |q|
+      (q.start_at < end_at) & (q.end_at > start_at) & (q.id != id)
+    }.blank?
+    unless available
+      errors.add(:base, 'conflict with other schedule')
+      return
+    end
   end
 
 end

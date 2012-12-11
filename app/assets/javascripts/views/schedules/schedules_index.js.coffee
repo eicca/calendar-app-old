@@ -62,7 +62,9 @@ class App.Views.SchedulesIndex extends Backbone.View
 
   eventDropOrResize: (event, revert) ->
     @schedules.get(event.id).save({title: 't', start_at: event.start, end_at: event.end},
-    error: (data) ->
+    error: (data, response) ->
       revert()
-      alert data.responseText
+      errors = $.parseJSON(response.responseText).errors
+      for attribute, messages of errors
+        alert("#{attribute} - #{message}") for message in messages
     )

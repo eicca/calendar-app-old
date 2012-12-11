@@ -18,6 +18,7 @@ class Lesson < ActiveRecord::Base
   end
 
   private
+
   def validate_datetime_interval
     available = teacher.schedules.where{|q| (q.start_at <= start_at) & (q.end_at >= end_at) }.any?
     unless available
