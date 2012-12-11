@@ -1,5 +1,4 @@
 %p Create new working hours?
-%p lala
 %p From #{@attrs.start_at} to #{@attrs.end_at}
 %p
   %button.button.ok Ok

@@ -1,0 +1,5 @@
+%p Edit event
+%p From #{@attrs.start} to #{@attrs.end}
+%p
+  %button.button.alert.delete Delete
+  %button.button.secondary.cancel Cancel
