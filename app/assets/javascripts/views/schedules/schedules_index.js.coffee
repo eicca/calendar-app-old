@@ -26,12 +26,18 @@ class App.Views.SchedulesIndex extends Backbone.View
         left: 'title'
         center: 'agendaWeek, month'
         right: 'today prev,next'
+      eventAfterRender: @afterRender
       select: @select
       eventClick: @eventClick
       eventDrop: @eventDrop
       eventResize: @eventResize
 
     return this
+
+  afterRender: (event, eventEl, view) ->
+    $eventEl = $(eventEl)
+    if event.recurring
+      $('.fc-event-bg', $eventEl).css('background-color', 'green')
 
   select: (startDate, endDate) ->
     attrs = title: 't', start_at: startDate, end_at: endDate

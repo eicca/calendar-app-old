@@ -2,7 +2,7 @@ class Schedule < ActiveRecord::Base
   belongs_to :teacher
   attr_accessible :end_at, :recurring, :start_at, :title
 
-  validates :title, :start_at, :end_at, :teacher, presence: true
+  validates :start_at, :end_at, :teacher, presence: true
   validate :validate_datetime_interval
 
   def as_json(options = {})
@@ -11,7 +11,7 @@ class Schedule < ActiveRecord::Base
       title: '',
       start: start_at.rfc822,
       end: end_at.rfc822,
-      recurring: false,
+      recurring: recurring,
       allDay: false,
       #className: 'teachers-event'
     }

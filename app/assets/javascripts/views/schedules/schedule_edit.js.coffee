@@ -4,11 +4,16 @@ class App.Views.ScheduleEdit extends App.Lib.Modal
 
   events:
     'click .delete': 'deleteSchedule'
+    'click .toggle-recurrence': 'toggleRecurrence'
     'click .cancel': 'closeModal'
 
   initialize: (@model) ->
     @attrs = @model.attributes
     super
+
+  toggleRecurrence: ->
+    @model.save(recurring: !@attrs.recurring)
+    @closeModal()
 
   deleteSchedule: ->
     #that = this
