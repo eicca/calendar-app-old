@@ -3,8 +3,11 @@
 
 :javascript
   $(function(){
-    var view = new App.Views.SchedulesIndex({teacherId: #{@teacher.id}});
-    $('#teacher-schedule').append(view.render().el);
+    var teacherId = #{@teacher.id};
+    var schedules = new App.Collections.Schedules({teacherId: teacherId});
+    schedules.reset(#{ @teacher.schedules.to_json });
+    var view = new App.Views.SchedulesIndex({schedules: schedules});
+    $('#teacher-schedule').append(view.render().el).resize(); //FIXME
   });
 
 %h2 Editing teacher profile

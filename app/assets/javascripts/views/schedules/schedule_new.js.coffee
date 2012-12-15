@@ -11,10 +11,10 @@ class App.Views.ScheduleNew extends App.Lib.Modal
 
   createSchedule: ->
     that = this
-    @collection.create(@attrs,
+    @collection.create({schedule: @attrs},
       success: (data) ->
         that.collection.trigger 'item:created', data
       error: (data) ->
-        alert data
+        #alert data
     )
     @closeModal()

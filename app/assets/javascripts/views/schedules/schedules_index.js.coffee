@@ -1,36 +1,40 @@
 class App.Views.SchedulesIndex extends Backbone.View
 
-  initialize: (@opts) ->
+  events:
+    'click .fc-button-next': 'fetchEvents'
+    'click .fc-button-prev': 'fetchEvents'
+
+  initialize: (opts) ->
     _(this).bindAll()
-    @schedules = new App.Collections.Schedules(teacherId: @opts.teacherId)
-    @lessons = new App.Collections.Lessons(teacherId: @opts.teacherId)
+    @schedules = opts.schedules
+    @lessons = new App.Collections.Lessons(teacherId: 1)
 
     for collection in [@schedules, @lessons]
       collection.on 'reset', @renderEvents, collection
       collection.on 'item:created', @renderNewEvent
       collection.on 'destroy', @removeEvent
-      collection.fetch()
 
   render: ->
     @$el.fullCalendar
-      events: []
       defaultView: 'agendaWeek'
       editable: true
-      minTime: '7:00' # start of the working day
-      maxTime: '20:00' # end of the working day
+      #minTime: '7:00' # start of the working day
+      #maxTime: '20:00' # end of the working day
       allDaySlot: false
       allDayDefault: false
       selectable: true
       selectHelper: true
       header:
         left: 'title'
-        center: 'agendaWeek, month'
         right: 'today prev,next'
       eventAfterRender: @afterRender
       select: @select
       eventClick: @eventClick
       eventDrop: @eventDrop
       eventResize: @eventResize
+
+    @renderEvents(@schedules)
+    #@schedules.fetch(data: {date_from: view.visStart, date_until: view.visEnd})
 
     return this
 
@@ -50,9 +54,12 @@ class App.Views.SchedulesIndex extends Backbone.View
     view.render()
 
   renderEvents: (collection) ->
-    @$el.resize() # FIXME boilerplate
-    #@$el.fullCalendar('removeEvents')
+    @$el.fullCalendar('removeEvents')
     @$el.fullCalendar('addEventSource', collection.toJSON())
+
+  fetchEvents: ->
+    view = @$el.fullCalendar('getView')
+    @schedules.fetch(data: {date_start: view.visStart, date_end: view.visEnd})
 
   renderNewEvent: (event) ->
     @$el.fullCalendar('renderEvent', event.toJSON())
@@ -67,7 +74,7 @@ class App.Views.SchedulesIndex extends Backbone.View
     @eventDropOrResize event, revertFunc
 
   eventDropOrResize: (event, revert) ->
-    @schedules.get(event.id).save({title: 't', start_at: event.start, end_at: event.end},
+    @schedules.get(event.id).save(schedule: {start_at: event.start, end_at: event.end},
     error: (data, response) ->
       revert()
       errors = $.parseJSON(response.responseText).errors
