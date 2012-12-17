@@ -24,6 +24,7 @@ class App.Views.SchedulesIndex extends Backbone.View
       allDayDefault: false
       selectable: true
       selectHelper: true
+      firstDay: 1
       header:
         left: 'title'
         right: 'today prev,next'
@@ -59,7 +60,7 @@ class App.Views.SchedulesIndex extends Backbone.View
 
   fetchEvents: ->
     view = @$el.fullCalendar('getView')
-    @schedules.fetch(data: {date_start: view.visStart, date_end: view.visEnd})
+    @schedules.fetch(data: {date_start: view.visStart})
 
   renderNewEvent: (event) ->
     @$el.fullCalendar('renderEvent', event.toJSON())

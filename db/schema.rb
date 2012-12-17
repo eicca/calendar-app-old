@@ -32,9 +32,11 @@ ActiveRecord::Schema.define(:version => 20121128143937) do
     t.string   "title"
     t.datetime "start_at"
     t.datetime "end_at"
+    t.integer  "seconds_before_start"
+    t.integer  "seconds_before_end"
     t.boolean  "recurring"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
   end
 
   add_index "schedules", ["teacher_id"], :name => "index_schedules_on_teacher_id"
