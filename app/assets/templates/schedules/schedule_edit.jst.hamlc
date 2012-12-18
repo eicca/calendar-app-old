@@ -1,0 +1,13 @@
+%p Edit event
+%p From
+  %b= _(@attrs.start).formatDate()
+  to
+  %b= _(@attrs.end).formatDate()
+%p
+  - if @attrs.recurring
+    %button.button.secondary.toggle-recurrence Disable recurrence
+  - else
+    %button.button.success.toggle-recurrence Enable recurrence
+%p
+  %button.button.alert.delete Delete
+  %button.button.secondary.cancel Cancel

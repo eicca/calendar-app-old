@@ -5,6 +5,8 @@ class CreateSchedules < ActiveRecord::Migration
       t.string :title
       t.datetime :start_at
       t.datetime :end_at
+      t.integer :seconds_before_start
+      t.integer :seconds_before_end
       t.boolean :recurring
 
       t.timestamps

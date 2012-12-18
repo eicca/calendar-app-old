@@ -1,0 +1,8 @@
+%p Edit lesson
+%p From
+  %b= _(@attrs.start).formatDate()
+  to
+  %b= _(@attrs.end).formatDate()
+%p
+  %button.button.alert.delete Delete
+  %button.button.secondary.cancel Cancel
