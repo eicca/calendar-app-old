@@ -1,5 +1,19 @@
 %h1 New lesson
 
-= render 'form'
+#lessons-picker
+
+:javascript
+  $(function(){
+    var teacherId = #{ @teacher.id };
+    var schedules = new App.Collections.Schedules({teacherId: teacherId});
+    var lessons = new App.Collections.Lessons({teacherId: teacherId});
+    schedules.reset(#{ @teacher.schedules.to_json });
+    lessons.reset(#{ @teacher.lessons.to_json });
+    var view = new App.Views.LessonsIndex({
+      schedules: schedules,
+      lessons: lessons
+    });
+    $('#lessons-picker').append(view.render().el).resize(); //FIXME
+  });
 
 = link_to 'Back', lessons_path

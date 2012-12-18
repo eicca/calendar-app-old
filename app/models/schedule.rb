@@ -20,15 +20,16 @@ class Schedule < ActiveRecord::Base
       start: date_start.advance(seconds: secs_before_start).rfc822,
       end: date_start.advance(seconds: secs_before_end).rfc822,
       recurring: recurring,
-      allDay: false
-      #className: 'teachers-event'
+      allDay: false,
+      className: 'schedule-event',
+      eventType: 'schedule'
     }
   end
 
 
   private
 
-  #TODO cache seconds calculation here
+  # TODO cache seconds calculation here
   def calculate_dates
     beginning_of_week = start_at.beginning_of_week
     self.seconds_before_start = start_at - beginning_of_week
@@ -37,6 +38,7 @@ class Schedule < ActiveRecord::Base
     self.recurring = true
   end
 
+  # TODO fix validation for recurrence
   def validate_datetime_interval
     available = teacher.schedules.where{ |q|
       (q.start_at < end_at) & (q.end_at > start_at) & (q.id != id)

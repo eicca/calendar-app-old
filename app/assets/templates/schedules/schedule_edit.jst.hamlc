@@ -1,9 +1,8 @@
 %p Edit event
 %p From
-  - # FIXME!!! should be moved into helper functions
-  %b= $.fullCalendar.formatDate($.fullCalendar.parseDate(@attrs.start), 'H:M dd-M-yy')
+  %b= _(@attrs.start).formatDate()
   to
-  %b= $.fullCalendar.formatDate($.fullCalendar.parseDate(@attrs.end), 'H:M dd-M-yy')
+  %b= _(@attrs.end).formatDate()
 %p
   - if @attrs.recurring
     %button.button.secondary.toggle-recurrence Disable recurrence

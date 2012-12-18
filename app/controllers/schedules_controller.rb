@@ -1,4 +1,5 @@
 class SchedulesController < InheritedResources::Base
+  load_and_authorize_resource
   respond_to :json
   belongs_to :teacher
 

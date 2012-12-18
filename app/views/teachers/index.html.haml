@@ -3,6 +3,7 @@
     %tr
       %td= link_to teacher.name, teacher
       - if student_signed_in?
-        %td= link_to 'Take a lesson', new_lesson_path
+        %td= link_to 'Take a lesson',
+          new_lesson_path(teacher_id: teacher.id)
       - elsif
         %td Sign in as student to take a lesson

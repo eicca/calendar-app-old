@@ -1,4 +1,4 @@
-%p Create new working hours?
+%p Create new lesson?
 %p From
   %b= _(@attrs.start).formatDate()
   to
