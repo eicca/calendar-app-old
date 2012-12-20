@@ -1,6 +1,11 @@
 TeacherHelper::Application.routes.draw do
 
-  resources :lessons
+  resources :lessons do
+    member do
+      post 'confirm'
+      post 'accept'
+    end
+  end
 
   resources :students
 

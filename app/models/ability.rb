@@ -1,6 +1,9 @@
 class Ability
   include CanCan::Ability
 
+  # TODO lesson managing
+  # TODO lesson status changing
+
   def initialize(user)
     user ||= Student.new # guest user
 

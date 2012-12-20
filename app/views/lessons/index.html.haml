@@ -1,27 +1,19 @@
-%h1 Listing lessons
+%h2 Upcoming lessons
 
-%table
+%table.twelve
   %tr
-    %th End at
     %th Start at
-    %th Completed
+    %th End at
+    %th Status
     %th Student
     %th Teacher
-    %th
-    %th
     %th
 
   - @lessons.each do |lesson|
     %tr
-      %td= lesson.end_at
       %td= lesson.start_at
-      %td= lesson.completed
-      %td= lesson.student
-      %td= lesson.teacher
-      %td= link_to 'Show', lesson
-      %td= link_to 'Edit', edit_lesson_path(lesson)
-      %td= link_to 'Destroy', lesson, method: :delete, data: { confirm: 'Are you sure?' }
-
-%br
-
-= link_to 'New Lesson', new_lesson_path
+      %td= lesson.end_at
+      %td= lesson.status
+      %td= link_to lesson.student.name, lesson.student
+      %td= link_to lesson.teacher.name, lesson.teacher
+      %td= link_to 'View details', lesson

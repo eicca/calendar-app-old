@@ -1,0 +1,6 @@
+%p The lesson with id: #{@lesson.id} successfully completed.
+%p Student:
+= link_to @student.name, student_url(@student)
+
+%p You can see the details of this lesson
+= link_to 'here', lesson_url(@lesson)

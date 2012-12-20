@@ -1,21 +1,19 @@
-%p#notice= notice
+%p From:
+= @lesson.start_at
+
+%p Until:
+= @lesson.end_at
+
+%p Status:
+= @lesson.status
+
+%p Student:
+= link_to @lesson.student.name, @lesson.student
+
+%p Teacher:
+= link_to @lesson.teacher.name, @lesson.teacher
 
 %p
-  %b Duration:
-  = @lesson.duration
-%p
-  %b Start at:
-  = @lesson.start_at
-%p
-  %b Completed:
-  = @lesson.completed
-%p
-  %b Student:
-  = @lesson.student
-%p
-  %b Teacher:
-  = @lesson.teacher
+= render 'lesson_actions'
 
-= link_to 'Edit', edit_lesson_path(@lesson)
-\|
-= link_to 'Back', lessons_path
+= link_to 'Back', lessons_path, class: 'button secondary'

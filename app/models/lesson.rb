@@ -2,14 +2,18 @@ class Lesson < ActiveRecord::Base
 
   module STATUS
     PENDING = 'pending'
-    PLANNED = 'planned'
+    UPCOMING = 'upcoming'
+    GONE = 'gone'
+    COMPLETED = 'completed'
+
+    NOT_STARTED = [PENDING, UPCOMING]
   end
 
   belongs_to :student
   belongs_to :teacher
   validates :start_at, :end_at, :teacher, :student, presence: true
   validate :validate_datetime_interval
-  attr_accessible :end_at, :teacher_id, :start_at, :title
+  attr_accessible :end_at, :teacher_id, :start_at, :title, :status
 
   before_create :set_pending_status
   after_create :notify_teacher_about_new_lesson
