@@ -1,8 +1,8 @@
 %p Create new lesson?
 %p From
-  %b= _(@attrs.start).formatDate()
+  %b= _(@attrs.start_at).formatDate()
   to
-  %b= _(@attrs.end).formatDate()
+  %b= _(@attrs.end_at).formatDate()
 %p
   %button.button.ok Ok
   %button.button.secondary.cancel Cancel

@@ -6,7 +6,6 @@ class App.Lib.Modal extends Backbone.View
     _(this).bindAll()
 
   render: ->
-    console.log @attrs
     @$el.html(@template(content: @content(attrs: @attrs), title: @title))
     $('body').append(@el)
     @$el.reveal

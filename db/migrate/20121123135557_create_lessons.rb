@@ -4,7 +4,7 @@ class CreateLessons < ActiveRecord::Migration
       t.string :title
       t.datetime :start_at, null: false
       t.datetime :end_at, null: false
-      t.boolean :completed, default: false
+      t.string :status
       t.references :student, null: false
       t.references :teacher, null: false
 

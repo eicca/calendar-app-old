@@ -16,8 +16,4 @@
       .twelve.columns
         = render 'layouts/messages'
         = yield
-        %p
-          = current_teacher.try(:inspect)
-          %br/
-          = current_student.try(:inspect)
     %footer

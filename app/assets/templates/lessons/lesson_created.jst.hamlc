@@ -1,0 +1,4 @@
+%p You're successfully booked new lesson!
+%p You should wait until the teacher accept this lesson.
+%p
+  %button.button.cancel Close
