@@ -42,17 +42,25 @@ class Lesson < ActiveRecord::Base
   end
 
   def in_teacher_schedule
-    #available = teacher.schedules.where(
-      #"time(start_at:time)"
-                                       #).any?
-    #unless available
-      #errors.add(:base, 'not in working time')
-    #end
+    beginning_of_week = start_at.beginning_of_week
+    minutes_before_start = (start_at - beginning_of_week) / 60
+    minutes_before_end = (end_at - beginning_of_week) / 60
+
+    available = teacher.schedules.where{ |schedules|
+      (schedules.minutes_before_start <= minutes_before_start) &
+      (schedules.minutes_before_end >= minutes_before_end)
+    }.any?
+
+    unless available
+      errors.add(:base, 'not in working time')
+    end
   end
 
   def no_conflicts_with_other_lessons
-    available = teacher.lessons.where{ |q|
-      (q.start_at < end_at) & (q.end_at > start_at) & (q.id != id)
+    available = teacher.lessons.where{ |lessons|
+      (lessons.start_at < self.end_at) &
+      (lessons.end_at > self.start_at) &
+      (lessons.id != self.id)
     }.blank?
     unless available
       errors.add(:base, 'conflict with other lesson')
