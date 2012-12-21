@@ -6,7 +6,8 @@
     var teacherId = #{ @teacher.id };
     var schedules = new App.Collections.Schedules({teacherId: teacherId});
     var lessons = new App.Collections.Lessons({teacherId: teacherId});
-    schedules.reset(#{ @teacher.schedules.to_json });
+    // FIXME timezone issue
+    schedules.reset(#{ @teacher.schedules.to_json(beginning_of_week: Time.now.beginning_of_week.advance(hours: 4)) });
     lessons.reset(#{ @teacher.lessons.to_json });
     var view = new App.Views.SchedulesIndex({
       schedules: schedules,

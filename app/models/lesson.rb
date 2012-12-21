@@ -12,7 +12,8 @@ class Lesson < ActiveRecord::Base
   belongs_to :student
   belongs_to :teacher
   validates :start_at, :end_at, :teacher, :student, presence: true
-  validate :validate_datetime_interval
+  validate :no_conflicts_with_other_lessons
+  validate :in_teacher_schedule
   attr_accessible :end_at, :teacher_id, :start_at, :title, :status
 
   before_create :set_pending_status
@@ -40,19 +41,21 @@ class Lesson < ActiveRecord::Base
     LessonMailer.new_lesson(self).deliver
   end
 
-  def validate_datetime_interval
-  # TODO check recurrent dates
-    #available = teacher.schedules.where{|q| (q.start_at <= start_at) & (q.end_at >= end_at) }.any?
+  def in_teacher_schedule
+    #available = teacher.schedules.where(
+      #"time(start_at:time)"
+                                       #).any?
     #unless available
       #errors.add(:base, 'not in working time')
-      #return
     #end
+  end
+
+  def no_conflicts_with_other_lessons
     available = teacher.lessons.where{ |q|
       (q.start_at < end_at) & (q.end_at > start_at) & (q.id != id)
     }.blank?
     unless available
       errors.add(:base, 'conflict with other lesson')
-      return
     end
   end
 

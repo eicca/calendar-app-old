@@ -25,7 +25,6 @@ class LessonMailer < ActionMailer::Base
     @lesson = lesson
     @teacher = lesson.teacher
     @student = lesson.student
-
   end
 
 end
