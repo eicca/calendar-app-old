@@ -36,4 +36,9 @@ class LessonsController < InheritedResources::Base
     end
   end
 
+  def reschedule
+    @lesson.update_attributes(params[:lesson])
+    respond_with @lesson
+  end
+
 end

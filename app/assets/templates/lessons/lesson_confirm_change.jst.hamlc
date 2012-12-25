@@ -1,0 +1,9 @@
+%p You want to edit already requested lesson
+%p If this lesson was already confirmed by teacher he should confirm it again
+%p New time, from:
+  %b= _(@attrs.lesson.start_at).formatDate()
+  to
+  %b= _(@attrs.lesson.end_at).formatDate()
+%p
+  %button.button.alert.ok Confirm
+  %button.button.secondary.cancel Cancel

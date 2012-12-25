@@ -21,13 +21,10 @@ class Schedule < ActiveRecord::Base
 
     {
       id: id,
-      title: '',
       start: start_datetime,
       end: end_datetime,
       recurring: recurring,
-      allDay: false,
-      className: 'schedule-event',
-      eventType: 'schedule'
+      title: 'working hours'
     }
   end
 

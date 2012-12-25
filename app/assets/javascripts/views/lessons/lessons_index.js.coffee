@@ -17,18 +17,14 @@ class App.Views.LessonsIndex extends App.Lib.BaseCalendar
   select: (startDate, endDate) ->
     attrs = start_at: startDate, end_at: endDate, teacher_id: @teacherId
     console.log attrs
-    view = new App.Views.LessonNew(attrs, @lessons)
-    view.render()
+    new App.Views.LessonNew(attrs, @lessons).render()
 
   eventClick: (event) ->
     return if event.eventType is 'schedule'
     model = @lessons.get(event.id)
-    view = new App.Views.LessonEdit(model)
-    view.render()
+    new App.Views.LessonEdit(model).render()
 
   eventDropOrResize: (event, revert) ->
-    data = { lesson: { start_at: event.start, end_at: event.end } }
-    @lessons.get(event.id).save data,
-    error: (data, response) ->
-      revert()
-      alert JSON.stringify(response)
+    attrs = { lesson: { start_at: event.start, end_at: event.end } }
+    model = @lessons.get(event.id)
+    new App.Views.LessonConfirmChange(model, attrs, revert).render()

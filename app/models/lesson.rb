@@ -22,12 +22,10 @@ class Lesson < ActiveRecord::Base
   def as_json(options = {})
     {
       id: id.to_s + ?l, # FIXME weird id passed to fc
-      title: '',
       start: start_at.rfc822,
       end: end_at.rfc822,
-      allDay: false,
-      className: 'lessons-event',
-      eventType: 'lesson'
+      title: "Lesson with: #{student.name}",
+      status: status
     }
   end
 

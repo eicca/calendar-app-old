@@ -4,6 +4,7 @@ TeacherHelper::Application.routes.draw do
     member do
       post 'confirm'
       post 'accept'
+      post 'reschedule'
     end
   end
 
