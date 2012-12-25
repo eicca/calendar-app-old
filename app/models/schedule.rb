@@ -2,50 +2,51 @@ class Schedule < ActiveRecord::Base
   belongs_to :teacher
   attr_accessible :end_at, :recurring, :start_at, :title
 
-  validates :start_at, :end_at, :teacher, presence: true
-  validate :validate_datetime_interval
+  validates :start_at, :end_at, :teacher, :minutes_before_start,
+    :minutes_before_end, presence: true
+  validate :one_schedule_in_one_time
 
-  #before_save :calculate_dates
+  # FIXME seems in some rare cases it may not work if we want to
+  # not use validation (like in update_all)
+  before_validation :calculate_minutes
 
   def as_json(options = {})
-    beginning_of_week = start_at.beginning_of_week
-    secs_before_start = start_at - beginning_of_week
-    secs_before_end = end_at - beginning_of_week
-    date_start = options[:date_start] || beginning_of_week
+    # FIXME timezone issue
+    beginning_of_week = options[:beginning_of_week] ||
+      start_at.beginning_of_week.advance(hours: 4)
+    logger.info beginning_of_week
+
+    start_datetime = beginning_of_week.advance(minutes: minutes_before_start)
+    end_datetime = beginning_of_week.advance(minutes: minutes_before_end)
+
     {
       id: id,
-      title: '',
-      #start: start_at.rfc822,
-      #end: end_at.rfc822,
-      start: date_start.advance(seconds: secs_before_start).rfc822,
-      end: date_start.advance(seconds: secs_before_end).rfc822,
+      start: start_datetime,
+      end: end_datetime,
       recurring: recurring,
-      allDay: false,
-      className: 'schedule-event',
-      eventType: 'schedule'
+      title: 'working hours'
     }
   end
 
-
   private
 
-  # TODO cache seconds calculation here
-  def calculate_dates
+  def calculate_minutes
     beginning_of_week = start_at.beginning_of_week
-    self.seconds_before_start = start_at - beginning_of_week
-    self.seconds_before_end = end_at - beginning_of_week
+    self.minutes_before_start = (start_at - beginning_of_week) / 60
+    self.minutes_before_end = (end_at - beginning_of_week) / 60
 
     self.recurring = true
+    true
   end
 
-  # TODO fix validation for recurrence
-  def validate_datetime_interval
-    available = teacher.schedules.where{ |q|
-      (q.start_at < end_at) & (q.end_at > start_at) & (q.id != id)
+  def one_schedule_in_one_time
+    available = teacher.schedules.where{ |schedules|
+      (schedules.minutes_before_start < self.minutes_before_end) &
+      (schedules.minutes_before_end > self.minutes_before_start) &
+      (schedules.id != self.id)
     }.blank?
     unless available
       errors.add(:base, 'conflict with other schedule')
-      return
     end
   end
 

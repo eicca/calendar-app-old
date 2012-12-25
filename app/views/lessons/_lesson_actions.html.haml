@@ -1,0 +1,15 @@
+- if student_signed_in?
+  - case @lesson.status
+  - when Lesson::STATUS::UPCOMING
+    = button_to 'Confirm lesson', confirm_lesson_path(@lesson),
+      class: 'button success'
+
+- if teacher_signed_in?
+  - case @lesson.status
+  - when Lesson::STATUS::PENDING
+    = button_to 'Accept lesson', accept_lesson_path(@lesson),
+      class: 'button success'
+
+- if Lesson::STATUS::NOT_STARTED.include?(@lesson.status)
+  = link_to 'Cancel this lesson', lesson_path(@lesson),
+    method: :delete, class: 'button alert'

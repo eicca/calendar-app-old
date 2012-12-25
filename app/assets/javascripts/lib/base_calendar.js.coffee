@@ -35,11 +35,12 @@ class App.Lib.BaseCalendar extends Backbone.View
   afterRender: (event, eventEl, view) ->
     $eventEl = $(eventEl)
     if event.eventType is 'schedule'
-      $eventEl.width($eventEl.width() / 4)
+      $eventEl.width('120px')
       @afterRenderSchedule?(event, $eventEl)
     else
-      $eventEl.width($eventEl.width() * 1.5)
-      $eventEl.children('*').css('background-color', 'red')
+      $eventEl.width('105px')
+      $eventEl.css('margin-left', '-43px')
+      #$eventEl.children('*').css('background-color', 'red')
       @afterRenderLesson?(event, $eventEl)
     #if event.recurring
       #$('.fc-event-bg', $eventEl).css('background-color', 'green')

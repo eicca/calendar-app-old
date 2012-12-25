@@ -1,6 +1,7 @@
 class App.Views.LessonNew extends App.Lib.Modal
   content: JST['lessons/lesson_new']
   title: 'Create lesson'
+  lessonCreatedTemplate: JST['lessons/lesson_created']
 
   events:
     'click .ok': 'createLesson'
@@ -10,11 +11,13 @@ class App.Views.LessonNew extends App.Lib.Modal
     super
 
   createLesson: ->
-    that = this
     @collection.create({lesson: @attrs},
-      success: (data) ->
-        that.collection.trigger 'item:created', data
+      success: @lessonCreated
       error: (data) ->
         #alert data
+        @closeModal()
     )
-    @closeModal()
+
+  lessonCreated: (data) ->
+    @collection.trigger 'item:created', data
+    @$el.html(@lessonCreatedTemplate())

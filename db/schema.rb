@@ -15,13 +15,13 @@ ActiveRecord::Schema.define(:version => 20121128143937) do
 
   create_table "lessons", :force => true do |t|
     t.string   "title"
-    t.datetime "start_at",                      :null => false
-    t.datetime "end_at",                        :null => false
-    t.boolean  "completed",  :default => false
-    t.integer  "student_id",                    :null => false
-    t.integer  "teacher_id",                    :null => false
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
+    t.datetime "start_at",   :null => false
+    t.datetime "end_at",     :null => false
+    t.string   "status"
+    t.integer  "student_id", :null => false
+    t.integer  "teacher_id", :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   add_index "lessons", ["student_id"], :name => "index_lessons_on_student_id"
@@ -32,8 +32,8 @@ ActiveRecord::Schema.define(:version => 20121128143937) do
     t.string   "title"
     t.datetime "start_at"
     t.datetime "end_at"
-    t.integer  "seconds_before_start"
-    t.integer  "seconds_before_end"
+    t.integer  "minutes_before_start"
+    t.integer  "minutes_before_end"
     t.boolean  "recurring"
     t.datetime "created_at",           :null => false
     t.datetime "updated_at",           :null => false

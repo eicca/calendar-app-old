@@ -1,0 +1,6 @@
+%p Your lesson request with id: #{@lesson.id} accepted
+%p Teacher:
+= link_to @teacher.name, teacher_url(@teacher)
+
+%p You can see the details of this lesson
+= link_to 'here', lesson_url(@lesson)

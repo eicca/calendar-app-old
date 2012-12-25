@@ -3,10 +3,13 @@ class CreateSchedules < ActiveRecord::Migration
     create_table :schedules do |t|
       t.references :teacher
       t.string :title
+
       t.datetime :start_at
       t.datetime :end_at
-      t.integer :seconds_before_start
-      t.integer :seconds_before_end
+
+      t.integer :minutes_before_start
+      t.integer :minutes_before_end
+
       t.boolean :recurring
 
       t.timestamps

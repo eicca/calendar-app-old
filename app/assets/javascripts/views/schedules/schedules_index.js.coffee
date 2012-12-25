@@ -19,11 +19,17 @@ class App.Views.SchedulesIndex extends App.Lib.BaseCalendar
     view.render()
 
   eventClick: (event) ->
-    model = @schedules.get(event.id)
-    view = new App.Views.ScheduleEdit(model)
-    view.render()
+    if event.eventType is 'schedule'
+      model = @schedules.get(event.id)
+      new App.Views.ScheduleEdit(model).render()
+    else
+      model = @lessons.get(event.id)
+      new App.Views.LessonInfoForTeacher(model).render()
 
   eventDropOrResize: (event, revert) ->
+    if event.eventType isnt 'schedule'
+      revert()
+      return
     data = { schedule: {start_at: event.start, end_at: event.end } }
     @schedules.get(event.id).save data,
     error: (data, response) ->

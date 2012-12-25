@@ -6,8 +6,10 @@ class App.Lib.Modal extends Backbone.View
     _(this).bindAll()
 
   render: ->
-    console.log @attrs
-    @$el.html(@template(content: @content(attrs: @attrs), title: @title))
+    @$el.html(@template
+      content: @content(model: @model, attrs: @attrs)
+      title: @title
+    )
     $('body').append(@el)
     @$el.reveal
       animation: 'none'
@@ -19,5 +21,6 @@ class App.Lib.Modal extends Backbone.View
     @$el.trigger('reveal:close')
 
   modalClosed: ->
+    @beforeModalClosed?()
     @unbind()
     @remove()
