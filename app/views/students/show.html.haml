@@ -1,0 +1,9 @@
+Name
+= @student.name
+%br/
+Lessons count
+= @student.lessons.count
+
+- if current_student.id == @student.id
+  = link_to 'Edit profile', edit_student_registration_path
+  = link_to 'Add money', '#'

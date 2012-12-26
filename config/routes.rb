@@ -8,9 +8,13 @@ TeacherHelper::Application.routes.draw do
     end
   end
 
-  resources :students
+  resources :students, only: [:index, :show] do
+    resource :balance, only: [:show, :edit, :update],
+      controller: 'StudentBalance'
+  end
 
   resources :teachers do
+    resource :balance
     resources :schedules
   end
 

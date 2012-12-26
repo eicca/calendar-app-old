@@ -1,0 +1,10 @@
+= simple_form_for :purchase, url: student_balance_path, method: 'PUT' do |f|
+  = f.input :amount
+  = f.fields_for :credentials do |ff|
+    = ff.input :first_name
+    = ff.input :last_name
+    = ff.input :number
+    = ff.input :month
+    = ff.input :year
+    = ff.input :verification_value
+  = f.button :submit

@@ -8,6 +8,7 @@
       %li= link_to 'Dashboard', edit_teacher_path(current_teacher)
       %li= link_to 'Log out', destroy_teacher_session_path, method: :delete
     - elsif student_signed_in?
+      %li= link_to current_balance, student_balance_path(current_student)
       %li= link_to 'Dashboard', lessons_path
       %li= link_to 'Log out', destroy_student_session_path, method: :delete
     - else

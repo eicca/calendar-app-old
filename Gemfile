@@ -33,3 +33,5 @@ gem 'squeel'
 gem 'backbone-on-rails'
 gem 'rails-footnotes', '>= 3.7.5.rc4', :group => :development
 gem 'mailcatcher'
+gem 'activemerchant', :require => 'active_merchant'
+gem 'money-rails'

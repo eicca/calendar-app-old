@@ -6,5 +6,7 @@ class Teacher < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  monetize :balance_cents
+
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me
 end
