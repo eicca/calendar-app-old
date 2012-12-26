@@ -1,7 +1,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require fullcalendar
+//= require fullcalendar-edited
 //= require foundation
 //= require jquery.ui.all
 //= require underscore

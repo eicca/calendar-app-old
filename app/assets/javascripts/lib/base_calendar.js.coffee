@@ -36,6 +36,7 @@ class App.Lib.BaseCalendar extends Backbone.View
     $eventEl = $(eventEl)
     if event.eventType is 'schedule'
       $eventEl.width('120px')
+      $eventEl.css('z-index', '1')
       @afterRenderSchedule?(event, $eventEl)
     else
       $eventEl.width('105px')

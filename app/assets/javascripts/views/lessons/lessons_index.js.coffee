@@ -20,11 +20,14 @@ class App.Views.LessonsIndex extends App.Lib.BaseCalendar
     new App.Views.LessonNew(attrs, @lessons).render()
 
   eventClick: (event) ->
-    return if event.eventType is 'schedule'
+    return if event.eventType isnt 'lesson'
     model = @lessons.get(event.id)
     new App.Views.LessonEdit(model).render()
 
   eventDropOrResize: (event, revert) ->
+    if event.eventType isnt 'lesson'
+      revert()
+      return
     attrs = { lesson: { start_at: event.start, end_at: event.end } }
     model = @lessons.get(event.id)
     new App.Views.LessonConfirmChange(model, attrs, revert).render()

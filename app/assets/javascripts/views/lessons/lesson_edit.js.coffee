@@ -16,5 +16,5 @@ class App.Views.LessonEdit extends App.Lib.Modal
       success:  ->
         #that.model.trigger 'deleted', this
       error: (data) ->
-        alert data.responseText
+        alert 'fail'
     @closeModal()

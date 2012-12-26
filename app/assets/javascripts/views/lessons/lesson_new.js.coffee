@@ -13,8 +13,9 @@ class App.Views.LessonNew extends App.Lib.Modal
   createLesson: ->
     @collection.create({lesson: @attrs},
       success: @lessonCreated
-      error: (data) ->
-        #alert data
+      error: (data) =>
+        console.log data
+        alert 'impossibru'
         @closeModal()
     )
 

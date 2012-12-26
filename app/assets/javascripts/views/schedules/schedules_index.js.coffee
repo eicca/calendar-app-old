@@ -34,4 +34,4 @@ class App.Views.SchedulesIndex extends App.Lib.BaseCalendar
     @schedules.get(event.id).save data,
     error: (data, response) ->
       revert()
-      alert 'fail'
+      alert 'impossibru'
