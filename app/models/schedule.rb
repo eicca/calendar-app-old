@@ -23,8 +23,7 @@ class Schedule < ActiveRecord::Base
       id: id,
       start: start_datetime,
       end: end_datetime,
-      recurring: recurring,
-      title: 'working hours'
+      recurring: recurring
     }
   end
 

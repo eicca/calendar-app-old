@@ -16,7 +16,6 @@ class App.Views.LessonsIndex extends App.Lib.BaseCalendar
 
   select: (startDate, endDate) ->
     attrs = start_at: startDate, end_at: endDate, teacher_id: @teacherId
-    console.log attrs
     new App.Views.LessonNew(attrs, @lessons).render()
 
   eventClick: (event) ->

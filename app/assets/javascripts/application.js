@@ -6,6 +6,7 @@
 //= require jquery.ui.all
 //= require underscore
 //= require backbone
+//= require backbone.mutators
 //= require hamlcoffee
 //= require main
 //= require_tree ../templates

@@ -13,6 +13,7 @@ group :development do
   gem "better_errors"
   gem "binding_of_caller"
 end
+
 gem 'jquery-rails'
 gem "thin", ">= 1.5.0"
 gem "haml", github: 'haml/haml', branch: '3-2-stable'
