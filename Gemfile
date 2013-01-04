@@ -8,6 +8,11 @@ group :assets do
   gem 'haml_coffee_assets'
   gem 'execjs'
 end
+
+group :development do
+  gem "better_errors"
+  gem "binding_of_caller"
+end
 gem 'jquery-rails'
 gem "thin", ">= 1.5.0"
 gem "haml", github: 'haml/haml', branch: '3-2-stable'
@@ -31,7 +36,6 @@ gem 'cancan'
 gem 'inherited_resources'
 gem 'squeel'
 gem 'backbone-on-rails'
-gem 'rails-footnotes', '>= 3.7.5.rc4', :group => :development
 gem 'mailcatcher'
 gem 'activemerchant', :require => 'active_merchant'
 gem 'money-rails'
