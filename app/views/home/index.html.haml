@@ -6,10 +6,10 @@
   .six.columns
     %h4 Top students
     %table.twelve
+      %tr
+        %th Name
+        %th Lessons count
       - @students.each do |student|
-        %tr
-          %th Name
-          %th Lessons count
         %tr
           %td= student.name
           %td= student.lessons.count

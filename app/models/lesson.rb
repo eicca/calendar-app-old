@@ -34,7 +34,8 @@ class Lesson < ActiveRecord::Base
       start: start_at.rfc822,
       end: end_at.rfc822,
       title: "Lesson with: #{student.name}, Status: #{status}",
-      status: status
+      status: status,
+      student: student
     }
   end
 

@@ -7,7 +7,15 @@ class App.Models.Lesson extends Backbone.Model
 
   mutators:
     color: ->
-      if @get('status') is 'completed'
+      if not @isOwner()
+        return '#acc'
+      else if @get('status') is 'completed'
         return '#aaa'
       else
         return '#60A6A6'
+    editable: ->
+      @isOwner()
+
+  isOwner: ->
+    currentUser.id == @get('student').id
+

@@ -19,7 +19,7 @@ class App.Views.LessonsIndex extends App.Lib.BaseCalendar
     new App.Views.LessonNew(attrs, @lessons).render()
 
   eventClick: (event) ->
-    return if event.eventType isnt 'lesson'
+    return if (event.eventType isnt 'lesson') or (not event.editable)
     model = @lessons.get(event.id)
     new App.Views.LessonEdit(model).render()
 
