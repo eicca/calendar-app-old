@@ -64,7 +64,9 @@ class App.Lib.BaseCalendar extends Backbone.View
     @$el.fullCalendar('removeEvents', event.id)
 
   eventResize: (event,dayDelta,minuteDelta,revertFunc) ->
-    @eventDropOrResize event, revertFunc
+    # disable resize for a while
+    revertFunc()
+    #@eventDropOrResize event, revertFunc
 
   eventDrop: (event,dayDelta,minuteDelta,allDay,revertFunc) ->
     @eventDropOrResize event, revertFunc

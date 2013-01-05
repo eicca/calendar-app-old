@@ -2,5 +2,5 @@ _.mixin
 
   formatDate: (date) ->
     $.fullCalendar.formatDate(
-      $.fullCalendar.parseDate(date), 'H:M dd-M-yy'
+      $.fullCalendar.parseDate(date), 'HH:MM dd-M-yy'
     )

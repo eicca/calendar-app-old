@@ -10,19 +10,19 @@ class Student < ActiveRecord::Base
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me
 
   def purchase(amount, credentials)
-    credit_card = ActiveMerchant::Billing::CreditCard.new(credentials)
-    if credit_card.valid?
-      response = GATEWAY.purchase(amount, credit_card)
-      if response.success?
+    #credit_card = ActiveMerchant::Billing::CreditCard.new(credentials)
+    #if credit_card.valid?
+      #response = GATEWAY.purchase(amount, credit_card)
+      #if response.success?
         self.balance += Money.new(amount, 'USD')
         # FIXME looks like Spanish ruby
         return !self.save!
-      else
-        return response.message
-      end
-    else
-      return 'invalid credit card'
-    end
+      #else
+        #return response.message
+      #end
+    #else
+      #return 'invalid credit card'
+    #end
   end
 
 end

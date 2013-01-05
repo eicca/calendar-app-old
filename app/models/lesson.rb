@@ -3,7 +3,6 @@ class Lesson < ActiveRecord::Base
   module STATUS
     PENDING = 'pending'
     UPCOMING = 'upcoming'
-    GONE = 'gone'
     COMPLETED = 'completed'
 
     NOT_STARTED = [PENDING, UPCOMING]
@@ -16,12 +15,16 @@ class Lesson < ActiveRecord::Base
   validate :no_conflicts_with_other_lessons
   validate :in_teacher_schedule
   validate :not_earlier_than_tomorrow
+  validate :student_has_enough_money, on: :create
+  validate :should_not_be_completed, on: :destroy
 
   attr_accessible :end_at, :teacher_id, :start_at, :title, :status
 
   before_create :set_pending_status
   after_create :notify_teacher_about_new_lesson
+  before_create :withdraw_money
   before_destroy :notify_about_canceling
+  before_destroy :return_money_to_student
 
   def as_json(options = {})
     {
@@ -30,9 +33,26 @@ class Lesson < ActiveRecord::Base
       id: id.to_s + ?l,
       start: start_at.rfc822,
       end: end_at.rfc822,
-      title: "Lesson with: #{student.name}",
+      title: "Lesson with: #{student.name}, Status: #{status}",
       status: status
     }
+  end
+
+  # returns money object
+  def cost
+    teacher.price * (end_at - start_at) / 1.hour
+  end
+
+  def complete
+    self.status = STATUS::COMPLETED
+    if self.save
+      LessonMailer.lesson_completed(self).deliver
+      teacher.balance += cost
+      teacher.save!
+      true
+    else
+      false
+    end
   end
 
   private
@@ -82,6 +102,28 @@ class Lesson < ActiveRecord::Base
     #return false unless status == STATUS::PENDING
     LessonMailer.lesson_canceled(self).deliver
     true
+  end
+
+  def withdraw_money
+    student.balance -= cost
+    student.save!
+  end
+
+  def student_has_enough_money
+    if cost > student.balance
+      errors.add(:base, 'not enough money')
+    end
+  end
+
+  def should_not_be_completed
+    if status == STATUS::COMPLETED
+      errors.add(:base, 'lesson already completed')
+    end
+  end
+
+  def return_money_to_student
+    student.balance += cost
+    student.save!
   end
 
 end

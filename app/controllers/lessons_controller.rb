@@ -28,7 +28,7 @@ class LessonsController < InheritedResources::Base
   end
 
   def confirm
-    if @lesson.update_attributes(status: Lesson::STATUS::COMPLETED)
+    if @lesson.complete
       LessonMailer.lesson_completed(@lesson).deliver
       redirect_to lessons_path, notice: 'Lesson marked as completed'
     else

@@ -14,7 +14,6 @@ class Schedule < ActiveRecord::Base
     # FIXME timezone issue
     beginning_of_week = options[:beginning_of_week] ||
       start_at.beginning_of_week.advance(hours: 4)
-    logger.info beginning_of_week
 
     start_datetime = beginning_of_week.advance(minutes: minutes_before_start)
     end_datetime = beginning_of_week.advance(minutes: minutes_before_end)

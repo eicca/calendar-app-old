@@ -1,8 +1,9 @@
-%p Edit lesson
-%p From
-  %b= _(@attrs.start).formatDate()
-  to
-  %b= _(@attrs.end).formatDate()
+%p Lesson status: <b>#{@attrs.status}</b>
+%p Time, from:
+  = _(@attrs.start).formatDate()
+  to:
+  = _(@attrs.end).formatDate()
 %p
+  %a.button(href='#{@model.url()}' target='_blank') Open in new window
   %button.button.alert.delete Delete
-  %button.button.secondary.cancel Cancel
+  %button.button.secondary.cancel Close
