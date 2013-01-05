@@ -9,6 +9,8 @@ class Student < ActiveRecord::Base
 
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me
 
+  validate :name, presence: true
+
   def purchase(amount, credentials)
     #credit_card = ActiveMerchant::Billing::CreditCard.new(credentials)
     #if credit_card.valid?

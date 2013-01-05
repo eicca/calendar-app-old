@@ -10,4 +10,6 @@ class Teacher < ActiveRecord::Base
   monetize :price_cents
 
   attr_accessible :name, :email, :password, :password_confirmation, :remember_me
+
+  validate :name, presence: true
 end

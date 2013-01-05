@@ -29,7 +29,6 @@ class LessonsController < InheritedResources::Base
 
   def confirm
     if @lesson.complete
-      LessonMailer.lesson_completed(@lesson).deliver
       redirect_to lessons_path, notice: 'Lesson marked as completed'
     else
       redirect_to lessons_path, error: 'Lesson was not been completed'
