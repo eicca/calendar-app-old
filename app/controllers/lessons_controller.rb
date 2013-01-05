@@ -37,7 +37,11 @@ class LessonsController < InheritedResources::Base
   end
 
   def reschedule
-    @lesson.update_attributes(params[:lesson])
+    if @lesson.update_attributes(params[:lesson])
+      @lesson.status = Lesson::STATUS::PENDING
+      @lesson.save!
+      LessonMailer.change_request(@lesson).deliver
+    end
     respond_with @lesson
   end
 

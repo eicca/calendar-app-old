@@ -21,6 +21,7 @@ class Lesson < ActiveRecord::Base
 
   before_create :set_pending_status
   after_create :notify_teacher_about_new_lesson
+  before_destroy :notify_about_canceling
 
   def as_json(options = {})
     {
@@ -75,6 +76,12 @@ class Lesson < ActiveRecord::Base
     if start_at_changed? and (Time.now + 1.day > start_at)
       errors.add(:start_at, 'too early')
     end
+  end
+
+  def notify_about_canceling
+    #return false unless status == STATUS::PENDING
+    LessonMailer.lesson_canceled(self).deliver
+    true
   end
 
 end

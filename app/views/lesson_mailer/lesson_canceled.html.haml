@@ -1,0 +1,7 @@
+%p The lesson with id #{@lesson.id} was canceled.
+%p Time from: #{@lesson.start_at}
+%p Until: #{@lesson.end_at}
+%p Student:
+= link_to @student.name, student_url(@student)
+%p Teacher:
+= link_to @teacher.name, teacher_url(@teacher)

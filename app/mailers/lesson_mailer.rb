@@ -19,6 +19,18 @@ class LessonMailer < ActionMailer::Base
          subject: 'Your lesson successfully completed!'
   end
 
+  def change_request(lesson)
+    init lesson
+    mail to: @teacher.email,
+         subject: 'Request to change datetime of lesson.'
+  end
+
+  def lesson_canceled(lesson)
+    init lesson
+    mail to: @teacher.email,
+         subject: 'The lesson was canceled.'
+  end
+
   private
 
   def init(lesson)
