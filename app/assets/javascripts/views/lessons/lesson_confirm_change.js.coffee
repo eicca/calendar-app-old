@@ -10,7 +10,8 @@ class App.Views.LessonConfirmChange extends App.Lib.Modal
     super
 
   updateLesson: ->
-    @model.reschedule @attrs,
+    @model.save @attrs,
+      url: @model.url() + '/reschedule'
       success: =>
         @revert = ->
         @closeModal()

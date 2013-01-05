@@ -24,7 +24,9 @@ class Lesson < ActiveRecord::Base
 
   def as_json(options = {})
     {
-      id: id.to_s + ?l, # FIXME weird id passed to fc
+      # FIXME weird id passed to fc
+      # http://code.google.com/p/fullcalendar/issues/detail?id=940
+      id: id.to_s + ?l,
       start: start_at.rfc822,
       end: end_at.rfc822,
       title: "Lesson with: #{student.name}",

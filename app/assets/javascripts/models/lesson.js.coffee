@@ -6,15 +6,3 @@ class App.Models.Lesson extends Backbone.Model
     eventType: 'lesson'
     allDay: false
 
-  reschedule: (data, callbacks) ->
-    url = @url() + '/reschedule'
-    options =
-      url: url
-      dataType: 'json'
-      # FIXME TODO weird data passing
-      data: data
-      type: 'POST'
-
-    console.log options
-    _.extend options, callbacks
-    (@sync or Backbone.sync).call this, null, this, options
